@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Uploaded Image</h1>
+    <a href="{{ url_for('index') }}">Back</a><p>
+    <ul>
+    {% for file_url in file_urls %}
+        <li><img style="height: 300px" src="{{ file_url }}"></li>
+    {% endfor %}
+    </ul>
+    {% for file_path in inf_file_paths %}
+    <li><img style="height: 300px" src="{{ file_path }}"></li>
+    {% endfor %}
+
+</body>
+</html>
