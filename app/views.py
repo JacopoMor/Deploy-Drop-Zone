@@ -1,10 +1,11 @@
 from app import app, photos
 
 from flask import redirect, render_template, request, session, url_for
-from process.FaceDetection import FaceDetection as FD
+#from process.FaceDetection import FaceDetection as FD
+from process.FaceDetection import save_same_photo
 import os
 import requests
-import cv2
+#import cv2
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -52,10 +53,10 @@ def results():
         return redirect(url_for('index'))
 
     # set the file_urls and remove the session variable
-    print(session)
+    #print(session)
     file_urls = session['file_urls']
     file_names = session['file_names']
-    print(file_urls)
+    #print(file_urls)
     
     inf_file_paths = []
 
@@ -67,7 +68,8 @@ def results():
         # image_path = os.path.join(app.config['UPLOADED_PHOTOS_DEST'], file_name)
         save_path = os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i])
         # print(image_path)
-        image = FD.run_detection(model, file_url, save_path=save_path)
+        #image = FD.run_detection(model, file_url, save_path=save_path)
+        image = FD.save_image(file_url, save_path=save_path)
         inf_file_paths.append(os.path.join("static\\img\\inferred", file_names[i]))
      #nferred_paths = 
 
