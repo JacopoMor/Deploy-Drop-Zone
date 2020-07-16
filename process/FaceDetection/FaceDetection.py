@@ -2,8 +2,10 @@ import numpy as np
 # import cv2
 # import os
 import requests
-# from PIL import Image
-# from io import BytesIO
+from PIL import Image
+from io import BytesIO
+# apt update && apt install -y libglib2.0-0
+
 
 # image_path = "rooster.jpg"
 # confidence_treshold = 0.5
@@ -88,8 +90,8 @@ def save_same_photo(image_url, confidence_treshold=0.5, save_path=''):
 #     # pass the blob through the network and obtain the detections and
     response = requests.get(image_url)
     image = Image.open(BytesIO(response.content))
-    image = np.array(image)
-    im.save(save_path)
+    #image = np.array(image)
+    image.save(save_path)
 
 
 

@@ -1,1 +1,9 @@
+#environment packages
 /env
+
+# Images format
+*.jpg
+*.jpeg
+
+# 
+*.pyc

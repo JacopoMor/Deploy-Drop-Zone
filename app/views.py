@@ -1,8 +1,7 @@
 from app import app, photos
 
 from flask import redirect, render_template, request, session, url_for
-#from process.FaceDetection import FaceDetection as FD
-from process.FaceDetection import save_same_photo
+from process.FaceDetection import FaceDetection as FD
 import os
 import requests
 #import cv2
@@ -61,7 +60,7 @@ def results():
     inf_file_paths = []
 
     # # instatiate our classifier
-    model = FD.upload_model()
+    #model = FD.upload_model()
     print(file_names)
     for i, file_url in enumerate(file_urls):
 
@@ -69,7 +68,7 @@ def results():
         save_path = os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i])
         # print(image_path)
         #image = FD.run_detection(model, file_url, save_path=save_path)
-        image = FD.save_image(file_url, save_path=save_path)
+        image = FD.save_same_photo(file_url, save_path=save_path)
         inf_file_paths.append(os.path.join("static\\img\\inferred", file_names[i]))
      #nferred_paths = 
 
