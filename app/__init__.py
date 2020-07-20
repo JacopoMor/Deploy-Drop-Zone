@@ -18,8 +18,9 @@ app.config['DROPZONE_ALLOWED_FILE_TYPE'] = 'image/*'
 app.config['DROPZONE_REDIRECT_VIEW'] = 'results' # where we are redirected in cas of dropzon
 
 # Uploads settings
-app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '\\app\\static\\img\\uploads'
-app.config['INFERRED_PHOTOS_DEST'] = os.getcwd() + '\\app\\static\\img\\inferred'
+base_dir = os.path.abspath(os.path.dirname(__file__))
+app.config['UPLOADED_PHOTOS_DEST'] = base_dir +('\\static\\img\\uploads')# os.path.join('static', 'img','uploads')
+app.config['INFERRED_PHOTOS_DEST'] = base_dir + ('\\static\\img\\inferred')
 
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
@@ -27,3 +28,6 @@ patch_request_class(app)  # set maximum file size, default is 16MB
 
 
 from app import views
+
+if __name__ == "__main__":
+    app.run()
