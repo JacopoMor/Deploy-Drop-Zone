@@ -21,9 +21,10 @@ def index():
     if request.method == 'POST': # Request handles the uploaded data
         file_obj = request.files   # Request.files object containing the uploaded files
                                     # it is a multidict obj
-        for f in file_obj:
+        #message = request.get_json(force=True)
+        for f in file_obj:  
+            # encoded = message['image']
             file = request.files.get(f)
-            print(file_obj)
 
             # save the file with to our photos folder
             filename = photos.save(
@@ -32,14 +33,18 @@ def index():
             )
 
             # append image urls
-       
-            # file_url = os.path.join(app.config['UPLOADED_PHOTOS_DEST'], file_name)
-            # file_urls.append(file_url)
-            file_urls.append(photos.url(filename))
+
+            file_url = os.path.join(app.config['UPLOADED_PHOTOS_DEST'], file.filename)
+            print(33)
+            print(file_url)
+            
+            file_urls.append(file_url)
+            #file_urls.append(photos.url(filename))
             file_names.append(filename)
 
         session['file_urls'] = file_urls
         session['file_names'] = file_names
+        print(session)
         return "uploading..."
     # return dropzone template on GET request
     return render_template('public/index.html')
@@ -55,8 +60,6 @@ def results():
     #print(session)
     file_urls = session['file_urls']
     file_names = session['file_names']
-    #print(file_urls)
-    
     inf_file_paths = []
 
     # # instatiate our classifier
@@ -69,15 +72,18 @@ def results():
         # print(image_path)
         #image = FD.run_detection(model, file_url, save_path=save_path)
         image = FD.save_same_photo(file_url, save_path=save_path)
-        inf_file_paths.append(os.path.join("static\\img\\inferred", file_names[i]))
+        inf_file_paths.append(os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i]))
      #nferred_paths = 
 
     session.pop('file_urls', None)
     session.pop('file_names', None)
     session.pop('inf_file_paths', None)
 
-    print(inf_file_paths)
     
-    return render_template('public/results.html', file_urls=file_urls, inf_file_paths=inf_file_paths)
+    print('pathhhhhhh')
+    print(inf_file_paths)
+    print(file_names)
+
+    return render_template('public/results.html', file_names=file_names)
 
 

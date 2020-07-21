@@ -88,9 +88,9 @@ from io import BytesIO
 
 def save_same_photo(image_url, confidence_treshold=0.5, save_path=''):
 #     # pass the blob through the network and obtain the detections and
-    response = requests.get(image_url)
-    image = Image.open(BytesIO(response.content))
+    image = Image.open(image_url)#BytesIO(response.content))
     #image = np.array(image)
+    print(save_path)
     image.save(save_path)
 
 

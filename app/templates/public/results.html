@@ -11,12 +11,13 @@
     <h1>Uploaded Image</h1>
     <a href="{{ url_for('index') }}">Back</a><p>
     <ul>
-    {% for file_url in file_urls %}
-        <li><img style="height: 300px" src="{{ file_url }}"></li>
+    {% for file_name in file_names %}
+        <li><img style="height: 300px" src="{{ url_for('static', filename='img/uploads/'+ file_name) }}"></li>
     {% endfor %}
     </ul>
-    {% for file_path in inf_file_paths %}
-    <li><img style="height: 300px" src="{{ file_path }}"></li>
+    <h1>Modyfied Image</h1>
+    {% for file_name in file_names %}
+    <li><img style="height: 300px" src="{{ url_for('static', filename='img/inferred/'+file_name) }}"></li>
     {% endfor %}
 
 </body>

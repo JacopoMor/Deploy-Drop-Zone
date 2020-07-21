@@ -20,8 +20,8 @@ app.config['DROPZONE_REDIRECT_VIEW'] = 'results' # where we are redirected in ca
 # Uploads settings
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
-app.config['UPLOADED_PHOTOS_DEST'] = os.path.join('static', 'img', 'uploads')#base_dir + ('\\static\\img\\uploads')
-app.config['INFERRED_PHOTOS_DEST'] = os.path.join('static', 'img', 'inferred')#base_dir + ('\\static\\img\\inferred')
+app.config['UPLOADED_PHOTOS_DEST'] = os.path.join('app', 'static', 'img', 'uploads')#base_dir + ('\\static\\img\\uploads')
+app.config['INFERRED_PHOTOS_DEST'] = os.path.join('app', 'static', 'img', 'inferred')#base_dir + ('\\static\\img\\inferred')
 
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
