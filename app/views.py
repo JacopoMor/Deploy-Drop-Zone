@@ -4,7 +4,7 @@ from flask import redirect, render_template, request, session, url_for
 from process.FaceDetection import FaceDetection as FD
 import os
 import requests
-import cv2
+#import cv2
 
 # Upload model
 #model = FD.upload_model()
