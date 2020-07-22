@@ -7,7 +7,7 @@ import requests
 import cv2
 
 # Upload model
-model = FD.upload_model()
+#model = FD.upload_model()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -67,12 +67,10 @@ def results():
 
         # image_path = os.path.join(app.config['UPLOADED_PHOTOS_DEST'], file_name)
         save_path = os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i])
-        print(77, file_url)
-        image = FD.run_detection(model, file_url, save_path=save_path)
-        #image = FD.save_same_photo(file_url, save_path=save_path)
+        #image = FD.run_detection(model, file_url, save_path=save_path)
+        image = FD.save_same_photo(file_url, save_path=save_path)
         inf_file_paths.append(os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i]))
  
-
     session.pop('file_urls', None)
     session.pop('file_names', None)
     session.pop('inf_file_paths', None)
