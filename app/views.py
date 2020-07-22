@@ -71,16 +71,11 @@ def results():
         image = FD.run_detection(model, file_url, save_path=save_path)
         #image = FD.save_same_photo(file_url, save_path=save_path)
         inf_file_paths.append(os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i]))
-     #nferred_paths = 
+ 
 
     session.pop('file_urls', None)
     session.pop('file_names', None)
     session.pop('inf_file_paths', None)
-
-    
-    print('pathhhhhhh')
-    print(inf_file_paths)
-    print(file_names)
 
     return render_template('public/results.html', file_names=file_names)
 
