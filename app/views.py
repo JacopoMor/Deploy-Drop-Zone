@@ -4,7 +4,10 @@ from flask import redirect, render_template, request, session, url_for
 from process.FaceDetection import FaceDetection as FD
 import os
 import requests
-#import cv2
+import cv2
+
+# Upload model
+model = FD.upload_model()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -35,16 +38,12 @@ def index():
             # append image urls
 
             file_url = os.path.join(app.config['UPLOADED_PHOTOS_DEST'], file.filename)
-            print(33)
-            print(file_url)
-            
             file_urls.append(file_url)
             #file_urls.append(photos.url(filename))
             file_names.append(filename)
 
         session['file_urls'] = file_urls
         session['file_names'] = file_names
-        print(session)
         return "uploading..."
     # return dropzone template on GET request
     return render_template('public/index.html')
@@ -63,15 +62,14 @@ def results():
     inf_file_paths = []
 
     # # instatiate our classifier
-    #model = FD.upload_model()
-    print(file_names)
+
     for i, file_url in enumerate(file_urls):
 
         # image_path = os.path.join(app.config['UPLOADED_PHOTOS_DEST'], file_name)
         save_path = os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i])
-        # print(image_path)
-        #image = FD.run_detection(model, file_url, save_path=save_path)
-        image = FD.save_same_photo(file_url, save_path=save_path)
+        print(77, file_url)
+        image = FD.run_detection(model, file_url, save_path=save_path)
+        #image = FD.save_same_photo(file_url, save_path=save_path)
         inf_file_paths.append(os.path.join(app.config['INFERRED_PHOTOS_DEST'], file_names[i]))
      #nferred_paths = 
 
